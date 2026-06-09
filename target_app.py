@@ -1,6 +1,12 @@
 # target_app.py
 # ఇది intentionally vulnerable app — scan practice కోసం మాత్రమే!
-from flask import Flask, request, render_template_string
+try:
+    # type: ignore[import]
+    from flask import Flask, request, render_template_string
+except ImportError as exc:
+    raise ImportError(
+        "Flask is required to run this app. Install it with `pip install flask`."
+    ) from exc
 
 target = Flask(__name__)
 

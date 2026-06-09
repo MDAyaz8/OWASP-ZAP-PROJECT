@@ -1,8 +1,12 @@
 # zap_helper.py
 import json
 from datetime import datetime
-from zapv2 import ZAPv2
 import time
+
+try:
+    from zapv2 import ZAPv2  # type: ignore[import]
+except ImportError:
+    ZAPv2 = None
 
 ZAP_PROXY = 'http://127.0.0.1:8080'
 ZAP_API_KEY = 'ndfro34675l4pdnbs3dfj13i1p'
