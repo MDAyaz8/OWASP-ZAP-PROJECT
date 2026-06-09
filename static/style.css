@@ -1,0 +1,272 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f0f2f5;
+    padding-top: 20px;
+}
+
+/* Navbar */
+.navbar {
+    background: linear-gradient(90deg, #0f172a, #1e293b) !important;
+    color: white;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.nav-brand {
+    font-size: 20px;
+    font-weight: bold;
+    color: #00d4ff;
+}
+
+.nav-links a {
+    color: white !important;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #00d4ff;
+}
+
+.nav-links a:hover {
+    color: #00d4ff;
+}
+
+/* Container */
+.container {
+    width: 95%;
+    max-width: 1400px;
+    margin: 30px auto;
+}
+
+/* Page Header */
+.page-header {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.page-header h1 {
+    font-size: 2rem;
+    color: #1a1a2e;
+}
+
+.page-header p {
+    color: #666;
+    margin-top: 5px;
+}
+
+/* Status Bar */
+.status-bar {
+    background: #1a1a2e;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    display: flex;
+    gap: 30px;
+    margin-bottom: 20px;
+    font-size: 13px;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.status-dot.green {
+    background: #00ff87;
+}
+
+.status-dot.red {
+    background: #ff4444;
+}
+
+/* Steps */
+.steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.step {
+    background: #ddd;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #666;
+}
+
+.step.done {
+    background: #00d4ff;
+    color: white;
+}
+
+.step-arrow {
+    color: #999;
+    font-size: 18px;
+}
+
+/* Cards */
+.card {
+    background: white;
+    padding: 25px;
+    margin: 25px 0;
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+.card h2 {
+    color: #1a1a2e;
+    border-bottom: 2px solid #f0f2f5;
+    padding-bottom: 12px;
+    margin-bottom: 15px;
+}
+
+/* Messages */
+.success {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.warning {
+    color: #ffc107;
+    font-weight: bold;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    background: #1a1a2e;
+    color: white;
+    padding: 10px 22px;
+    border-radius: 6px;
+    text-decoration: none;
+    margin-top: 12px;
+    margin-right: 8px;
+    font-size: 14px;
+}
+
+.btn:hover {
+    background: #16213e;
+}
+
+.btn-red {
+    background: #dc3545;
+}
+
+.btn-red:hover {
+    background: #a71d2a;
+}
+
+.btn-green {
+    background: #28a745;
+}
+
+.btn-green:hover {
+    background: #1e7e34;
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 13px;
+}
+
+th {
+    background: #1a1a2e;
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Risk Boxes */
+.risk-summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin: 15px 0;
+}
+
+.risk-box {
+    flex: 1;
+    padding: 18px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.risk-box.high {
+    background: #ffe0e0;
+    border: 2px solid red;
+}
+
+.risk-box.medium {
+    background: #fff3cd;
+    border: 2px solid orange;
+}
+
+.risk-box.low {
+    background: #e0f7e0;
+    border: 2px solid green;
+}
+
+.risk-box.info {
+    background: #e0f0ff;
+    border: 2px solid blue;
+}
+
+/* Row Colors */
+.row-high {
+    background: #ffe0e0;
+}
+
+.row-medium {
+    background: #fff3cd;
+}
+
+.row-low {
+    background: #e0f7e0;
+}
+
+.row-informational {
+    background: #e0f0ff;
+}

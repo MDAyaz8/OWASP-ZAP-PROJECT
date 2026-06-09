@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>OWASP ZAP Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="nav-brand">OWASP ZAP Dashboard</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#spider-section">Spider</a>
+            <a href="#passive-section">Passive Scan</a>
+            <a href="#active-section">Active Scan</a>
+            <a href="/report">Download Report</a>
+        </div>
+    </div>
+
+    <div class="container" id="home">
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>Security Dashboard</h1>
+            <p>OWASP ZAP Automated Security Testing</p>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="status-item">
+                <span class="status-dot
+            {% if 'Connected' in zap_status %}green
+            {% else %}red{% endif %}"></span>
+                ZAP {{ zap_status }}
+            </div>
+            <div class="status-item">
+                Version: {{ zap_version }}
+            </div>
+            <div class="status-item">
+                Target: http://127.0.0.1:5001
+            </div>
+        </div>
+
+        <!-- Step Progress -->
+        <div class="steps">
+            <div class="step {% if scan_data.spider_done %}done{% endif %}">
+                1. Spider
+            </div>
+            <div class="step-arrow">→</div>
+            <div class="step {% if scan_data.passive_done %}done{% endif %}">
+                2. Passive Scan
+            </div>
+            <div class="step-arrow">→</div>
+            <div class="step {% if scan_data.active_done %}done{% endif %}">
+                3. Active Scan
+            </div>
+            <div class="step-arrow">→</div>
+            <div class="step {% if scan_data.active_done %}done{% endif %}">
+                4. Report
+            </div>
+        </div>
+
+        <!-- Card 1 - Spider -->
+        <div class="card" id="spider-section">
+            <h2>🕷️ Spider Scan</h2>
+            {% if scan_data.spider_done %}
+            <p class="success">Spider Complete!</p>
+            <p>Found <strong>{{ scan_data.urls|length }}</strong> URLs</p>
+            <ul>
+                {% for url in scan_data.urls %}
+                <li>{{ url }}</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p class="warning">Spider not started yet.</p>
+            {% endif %}
+            <a href="/spider" class="btn">Run Spider</a>
+        </div>
+
+        <!-- Card 2 - Passive Scan -->
+        <div class="card" id="passive-section">
+            <h2>🔍 Passive Scan</h2>
+            {% if scan_data.passive_done %}
+            <p class="success">Passive Scan Complete!</p>
+            <p>Found <strong>{{ scan_data.alerts|length }}</strong> alerts</p>
+            <table>
+                <tr>
+                    <th>Risk</th>
+                    <th>Alert Name</th>
+                    <th>URL</th>
+                </tr>
+                {% for alert in scan_data.alerts %}
+                <tr class="row-{{ alert.risk|lower }}">
+                    <td>{{ alert.risk }}</td>
+                    <td>{{ alert.alert }}</td>
+                    <td>{{ alert.url[:40] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <p class="warning">Run Spider first.</p>
+            {% endif %}
+            <a href="/passive" class="btn">Run Passive Scan</a>
+        </div>
+
+        <!-- Card 3 - Active Scan -->
+        <div class="card" id="active-section">
+            <h2>⚡ Active Scan</h2>
+            {% if scan_data.active_done %}
+            <p class="success">Active Scan Complete!</p>
+            <div class="risk-summary">
+                <div class="risk-box high">
+                    High<br>
+                    <strong>{{ scan_data.active_alerts.high|length }}</strong>
+                </div>
+                <div class="risk-box medium">
+                    Medium<br>
+                    <strong>{{ scan_data.active_alerts.medium|length }}</strong>
+                </div>
+                <div class="risk-box low">
+                    Low<br>
+                    <strong>{{ scan_data.active_alerts.low|length }}</strong>
+                </div>
+                <div class="risk-box info">
+                    Info<br>
+                    <strong>{{ scan_data.active_alerts.info|length }}</strong>
+                </div>
+            </div>
+            <table>
+                <tr>
+                    <th>Risk</th>
+                    <th>Alert</th>
+                    <th>URL</th>
+                </tr>
+                {% for alert in scan_data.active_alerts.all %}
+                <tr class="row-{{ alert.risk|lower }}">
+                    <td><strong>{{ alert.risk }}</strong></td>
+                    <td>{{ alert.alert }}</td>
+                    <td>{{ alert.url[:45] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <br>
+            <a href="/report" class="btn btn-green">Download Report</a>
+            {% else %}
+            <p class="warning">Run Spider and Passive Scan first.</p>
+            {% endif %}
+            <a href="/active" class="btn btn-red">Run Active Scan</a>
+        </div>
+
+    </div>
+</body>
+
+</html>

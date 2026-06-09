@@ -1,0 +1,285 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>ZAP Scan Report</title>
+        <style>
+            body { font-family: Arial; margin: 40px; }
+            h1 { color: #333; }
+            .summary { display: flex; gap: 20px; margin: 20px 0; }
+            .box { padding: 20px; border-radius: 8px; text-align: center; flex: 1; }
+            .high   { background: #ffe0e0; border: 2px solid red; }
+            .medium { background: #fff3cd; border: 2px solid orange; }
+            .low    { background: #e0f7e0; border: 2px solid green; }
+            .info   { background: #e0f0ff; border: 2px solid blue; }
+            table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+            th { background: #333; color: white; padding: 10px; text-align: left; }
+            td { padding: 8px; border-bottom: 1px solid #ddd; }
+            .row-High          { background: #ffe0e0; }
+            .row-Medium        { background: #fff3cd; }
+            .row-Low           { background: #e0f7e0; }
+            .row-Informational { background: #e0f0ff; }
+        </style>
+    </head>
+    <body>
+        <h1>OWASP ZAP Security Scan Report</h1>
+        <p><strong>Date:</strong> 2026-06-08 11:49:51</p>
+        <p><strong>Target:</strong> http://127.0.0.1:5001</p>
+        <p><strong>URLs Discovered:</strong> 8</p>
+        <p><strong>Passive Alerts:</strong> 38</p>
+
+        <h2>Active Scan Summary</h2>
+        <div class="summary">
+            <div class="box high">High<br><strong>0</strong></div>
+            <div class="box medium">Medium<br><strong>18</strong></div>
+            <div class="box low">Low<br><strong>18</strong></div>
+            <div class="box info">Info<br><strong>3</strong></div>
+        </div>
+
+        <h2>All Alerts</h2>
+        <table>
+            <tr>
+                <th>Risk</th>
+                <th>Alert</th>
+                <th>URL</th>
+                <th>Solution</th>
+            </tr>
+            
+            <tr class="row-Medium">
+                <td>Medium</td>
+                <td>Content Security Policy (CSP) Header Not Set</td>
+                <td>http://127.0.0.1:5001/sitemap.xml</td>
+                <td>Ensure that your web server, application server, load balancer, etc. is configur</td>
+            </tr>
+            <tr class="row-Medium">
+                <td>Medium</td>
+                <td>Missing Anti-clickjacking Header</td>
+                <td>http://127.0.0.1:5001</td>
+                <td>Modern Web browsers support the Content-Security-Policy and X-Frame-Options HTTP</td>
+            </tr>
+            <tr class="row-Informational">
+                <td>Informational</td>
+                <td>Authentication Request Identified</td>
+                <td>http://127.0.0.1:5001/login</td>
+                <td>This is an informational alert rather than a vulnerability and so there is nothi</td>
+            </tr>
+            <tr class="row-Medium">
+                <td>Medium</td>
+                <td>Missing Anti-clickjacking Header</td>
+                <td>http://127.0.0.1:5001/</td>
+                <td>Modern Web browsers support the Content-Security-Policy and X-Frame-Options HTTP</td>
+            </tr>
+            <tr class="row-Medium">
+                <td>Medium</td>
+                <td>Missing Anti-clickjacking Header</td>
+                <td>http://127.0.0.1:5001/comment</td>
+                <td>Modern Web browsers support the Content-Security-Policy and X-Frame-Options HTTP</td>
+            </tr>
+            <tr class="row-Medium">
+                <td>Medium</td>
+                <td>Content Security Policy (CSP) Header Not Set</td>
+                <td>http://127.0.0.1:5001/robots.txt</td>
+                <td>Ensure that your web server, application server, load balancer, etc. is configur</td>
+            </tr>
+            <tr class="row-Medium">
+                <td>Medium</td>
+                <td>Missing Anti-clickjacking Header</td>
+                <td>http://127.0.0.1:5001/login</td>
+                <td>Modern Web browsers support the Content-Security-Policy and X-Frame-Options HTTP</td>
+            </tr>
+            <tr class="row-Medium">
+                <td>Medium</td>
+                <td>Missing Anti-clickjacking Header</td>
+                <td>http://127.0.0.1:5001/search?q=ZAP</td>
+                <td>Modern Web browsers support the Content-Security-Policy and X-Frame-Options HTTP</td>
+            </tr>
+            <tr class="row-Medium">
+                <td>Medium</td>
+                <td>Missing Anti-clickjacking Header</td>
+                <td>http://127.0.0.1:5001/comment</td>
+                <td>Modern Web browsers support the Content-Security-Policy and X-Frame-Options HTTP</td>
+            </tr>
+            <tr class="row-Medium">
+                <td>Medium</td>
+                <td>Missing Anti-clickjacking Header</td>
+                <td>http://127.0.0.1:5001/search</td>
+                <td>Modern Web browsers support the Content-Security-Policy and X-Frame-Options HTTP</td>
+            </tr>
+            <tr class="row-Medium">
+                <td>Medium</td>
+                <td>Missing Anti-clickjacking Header</td>
+                <td>http://127.0.0.1:5001/login</td>
+                <td>Modern Web browsers support the Content-Security-Policy and X-Frame-Options HTTP</td>
+            </tr>
+            <tr class="row-Medium">
+                <td>Medium</td>
+                <td>Content Security Policy (CSP) Header Not Set</td>
+                <td>http://127.0.0.1:5001/comment</td>
+                <td>Ensure that your web server, application server, load balancer, etc. is configur</td>
+            </tr>
+            <tr class="row-Medium">
+                <td>Medium</td>
+                <td>Content Security Policy (CSP) Header Not Set</td>
+                <td>http://127.0.0.1:5001/search</td>
+                <td>Ensure that your web server, application server, load balancer, etc. is configur</td>
+            </tr>
+            <tr class="row-Medium">
+                <td>Medium</td>
+                <td>Content Security Policy (CSP) Header Not Set</td>
+                <td>http://127.0.0.1:5001/search?q=ZAP</td>
+                <td>Ensure that your web server, application server, load balancer, etc. is configur</td>
+            </tr>
+            <tr class="row-Medium">
+                <td>Medium</td>
+                <td>Content Security Policy (CSP) Header Not Set</td>
+                <td>http://127.0.0.1:5001/login</td>
+                <td>Ensure that your web server, application server, load balancer, etc. is configur</td>
+            </tr>
+            <tr class="row-Medium">
+                <td>Medium</td>
+                <td>Content Security Policy (CSP) Header Not Set</td>
+                <td>http://127.0.0.1:5001/</td>
+                <td>Ensure that your web server, application server, load balancer, etc. is configur</td>
+            </tr>
+            <tr class="row-Medium">
+                <td>Medium</td>
+                <td>Content Security Policy (CSP) Header Not Set</td>
+                <td>http://127.0.0.1:5001</td>
+                <td>Ensure that your web server, application server, load balancer, etc. is configur</td>
+            </tr>
+            <tr class="row-Medium">
+                <td>Medium</td>
+                <td>Content Security Policy (CSP) Header Not Set</td>
+                <td>http://127.0.0.1:5001/comment</td>
+                <td>Ensure that your web server, application server, load balancer, etc. is configur</td>
+            </tr>
+            <tr class="row-Medium">
+                <td>Medium</td>
+                <td>Content Security Policy (CSP) Header Not Set</td>
+                <td>http://127.0.0.1:5001/login</td>
+                <td>Ensure that your web server, application server, load balancer, etc. is configur</td>
+            </tr>
+            <tr class="row-Low">
+                <td>Low</td>
+                <td>Server Leaks Version Information via "Server" HTTP Response Header Field</td>
+                <td>http://127.0.0.1:5001/login</td>
+                <td>Ensure that your web server, application server, load balancer, etc. is configur</td>
+            </tr>
+            <tr class="row-Low">
+                <td>Low</td>
+                <td>Server Leaks Version Information via "Server" HTTP Response Header Field</td>
+                <td>http://127.0.0.1:5001</td>
+                <td>Ensure that your web server, application server, load balancer, etc. is configur</td>
+            </tr>
+            <tr class="row-Low">
+                <td>Low</td>
+                <td>Server Leaks Version Information via "Server" HTTP Response Header Field</td>
+                <td>http://127.0.0.1:5001/</td>
+                <td>Ensure that your web server, application server, load balancer, etc. is configur</td>
+            </tr>
+            <tr class="row-Low">
+                <td>Low</td>
+                <td>Server Leaks Version Information via "Server" HTTP Response Header Field</td>
+                <td>http://127.0.0.1:5001/login</td>
+                <td>Ensure that your web server, application server, load balancer, etc. is configur</td>
+            </tr>
+            <tr class="row-Low">
+                <td>Low</td>
+                <td>Server Leaks Version Information via "Server" HTTP Response Header Field</td>
+                <td>http://127.0.0.1:5001/comment</td>
+                <td>Ensure that your web server, application server, load balancer, etc. is configur</td>
+            </tr>
+            <tr class="row-Low">
+                <td>Low</td>
+                <td>Server Leaks Version Information via "Server" HTTP Response Header Field</td>
+                <td>http://127.0.0.1:5001/search</td>
+                <td>Ensure that your web server, application server, load balancer, etc. is configur</td>
+            </tr>
+            <tr class="row-Low">
+                <td>Low</td>
+                <td>Server Leaks Version Information via "Server" HTTP Response Header Field</td>
+                <td>http://127.0.0.1:5001/search?q=ZAP</td>
+                <td>Ensure that your web server, application server, load balancer, etc. is configur</td>
+            </tr>
+            <tr class="row-Low">
+                <td>Low</td>
+                <td>Server Leaks Version Information via "Server" HTTP Response Header Field</td>
+                <td>http://127.0.0.1:5001/comment</td>
+                <td>Ensure that your web server, application server, load balancer, etc. is configur</td>
+            </tr>
+            <tr class="row-Low">
+                <td>Low</td>
+                <td>Server Leaks Version Information via "Server" HTTP Response Header Field</td>
+                <td>http://127.0.0.1:5001/robots.txt</td>
+                <td>Ensure that your web server, application server, load balancer, etc. is configur</td>
+            </tr>
+            <tr class="row-Low">
+                <td>Low</td>
+                <td>Server Leaks Version Information via "Server" HTTP Response Header Field</td>
+                <td>http://127.0.0.1:5001/sitemap.xml</td>
+                <td>Ensure that your web server, application server, load balancer, etc. is configur</td>
+            </tr>
+            <tr class="row-Informational">
+                <td>Informational</td>
+                <td>User Controllable HTML Element Attribute (Potential XSS)</td>
+                <td>http://127.0.0.1:5001/search?q=ZAP</td>
+                <td>Validate all input and sanitize output it before writing to any HTML attributes.</td>
+            </tr>
+            <tr class="row-Low">
+                <td>Low</td>
+                <td>X-Content-Type-Options Header Missing</td>
+                <td>http://127.0.0.1:5001/comment</td>
+                <td>Ensure that the application/web server sets the Content-Type header appropriatel</td>
+            </tr>
+            <tr class="row-Low">
+                <td>Low</td>
+                <td>X-Content-Type-Options Header Missing</td>
+                <td>http://127.0.0.1:5001/search?q=ZAP</td>
+                <td>Ensure that the application/web server sets the Content-Type header appropriatel</td>
+            </tr>
+            <tr class="row-Low">
+                <td>Low</td>
+                <td>X-Content-Type-Options Header Missing</td>
+                <td>http://127.0.0.1:5001/login</td>
+                <td>Ensure that the application/web server sets the Content-Type header appropriatel</td>
+            </tr>
+            <tr class="row-Low">
+                <td>Low</td>
+                <td>X-Content-Type-Options Header Missing</td>
+                <td>http://127.0.0.1:5001/</td>
+                <td>Ensure that the application/web server sets the Content-Type header appropriatel</td>
+            </tr>
+            <tr class="row-Low">
+                <td>Low</td>
+                <td>X-Content-Type-Options Header Missing</td>
+                <td>http://127.0.0.1:5001</td>
+                <td>Ensure that the application/web server sets the Content-Type header appropriatel</td>
+            </tr>
+            <tr class="row-Low">
+                <td>Low</td>
+                <td>X-Content-Type-Options Header Missing</td>
+                <td>http://127.0.0.1:5001/comment</td>
+                <td>Ensure that the application/web server sets the Content-Type header appropriatel</td>
+            </tr>
+            <tr class="row-Low">
+                <td>Low</td>
+                <td>X-Content-Type-Options Header Missing</td>
+                <td>http://127.0.0.1:5001/search</td>
+                <td>Ensure that the application/web server sets the Content-Type header appropriatel</td>
+            </tr>
+            <tr class="row-Low">
+                <td>Low</td>
+                <td>X-Content-Type-Options Header Missing</td>
+                <td>http://127.0.0.1:5001/login</td>
+                <td>Ensure that the application/web server sets the Content-Type header appropriatel</td>
+            </tr>
+            <tr class="row-Informational">
+                <td>Informational</td>
+                <td>GET for POST</td>
+                <td>http://127.0.0.1:5001/login</td>
+                <td>Ensure that only POST is accepted where POST is expected.</td>
+            </tr>
+        </table>
+    </body>
+    </html>
+    
