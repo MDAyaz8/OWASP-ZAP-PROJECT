@@ -1,5 +1,12 @@
 # target_app.py
 # ఇది intentionally vulnerable app — scan practice కోసం మాత్రమే!
+# Add this at top of target_app.py
+import json
+USERS = {
+    'admin': 'admin123',
+    'user': 'password123',
+    'test': 'test123'
+}
 try:
     # type: ignore[import]
     from flask import Flask, request, render_template_string
@@ -28,23 +35,31 @@ def home():
 @target.route('/login', methods=['GET', 'POST'])
 def login():
     message = ''
+    status = ''
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
-        # Intentionally vulnerable — no validation!
-        message = f'Trying login: {username}'
+        if username in USERS and USERS[username] == password:
+            message = f'Login SUCCESS! Welcome {username}'
+            status = 'success'
+        else:
+            message = 'Login FAILED! Invalid credentials'
+            status = 'failed'
 
     return render_template_string('''
         <h2>Login Page</h2>
         <form method="POST">
             Username: <input name="username"><br><br>
-            Password: <input name="password" type="password"><br><br>
+            Password: <input name="password"
+                       type="password"><br><br>
             <input type="submit" value="Login">
         </form>
-        <p>{{ message }}</p>
+        <p style="color:
+            {{'green' if status == 'success' else 'red'}}">
+            {{ message }}
+        </p>
         <a href="/">Back</a>
-    ''', message=message)
-
+    ''', message=message, status=status)
 # Search page — XSS vulnerable
 
 
@@ -79,6 +94,49 @@ def comment():
         <p>Your comment: {{ comment_text }}</p>
         <a href="/">Back</a>
     ''', comment_text=comment_text)
+
+
+# API endpoint - get all users
+
+
+@target.route('/api/users')
+def api_users():
+    return json.dumps({
+        'users': ['admin', 'user', 'test'],
+        'total': 3
+    })
+
+# API endpoint - get user info
+
+
+@target.route('/api/user/<username>')
+def api_user(username):
+    if username in USERS:
+        return json.dumps({
+            'username': username,
+            'role': 'admin' if username == 'admin' else 'user',
+            'status': 'active'
+        })
+    return json.dumps({'error': 'User not found'}), 404
+
+# API endpoint - get scan status
+
+
+@target.route('/api/status')
+def api_status():
+    return json.dumps({
+        'app': 'Vulnerable Test App',
+        'version': '1.0',
+        'status': 'running',
+        'endpoints': [
+            '/login',
+            '/search',
+            '/comment',
+            '/api/users',
+            '/api/user/<username>',
+            '/api/status'
+        ]
+    })
 
 
 if __name__ == '__main__':

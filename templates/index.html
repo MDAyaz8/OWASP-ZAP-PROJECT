@@ -17,6 +17,10 @@
             <a href="#passive-section">Passive Scan</a>
             <a href="#active-section">Active Scan</a>
             <a href="/report">Download Report</a>
+            <a href="#proxy">Proxy</a>
+            <a href="#fuzz">Fuzzing</a>
+            <a href="#auth">Auth Testing</a>
+            <a href="#api">API Scan</a>
         </div>
     </div>
 
@@ -150,7 +154,177 @@
             {% endif %}
             <a href="/active" class="btn btn-red">Run Active Scan</a>
         </div>
+        <!-- Intercepting Proxy Card -->
+        <div class="card" id="proxy">
+            <h2>🔀 Intercepting Proxy</h2>
+            <p>ZAP acts as proxy between browser
+                and target — intercepts all HTTP requests.</p>
 
+            {% if scan_data.proxy_done %}
+            <p class="success">
+                Proxy Complete! —
+                {{ scan_data.proxy_requests|length }}
+                requests intercepted
+            </p>
+            <table>
+                <tr>
+                    <th>Method</th>
+                    <th>URL</th>
+                    <th>Status Code</th>
+                </tr>
+                {% for req in scan_data.proxy_requests %}
+                <tr>
+                    <td>
+                        <strong>{{ req.method }}</strong>
+                    </td>
+                    <td>{{ req.url[:50] }}</td>
+                    <td>{{ req.status_code }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <p class="warning">
+                Run Spider first, then View Proxy Requests.
+            </p>
+            {% endif %}
+            <a href="/proxy" class="btn">
+                View Intercepted Requests
+            </a>
+        </div>
+        <!-- Fuzzing Card -->
+        <div class="card" id="fuzz">
+            <h2>🎯 Fuzzing</h2>
+            <p>Sends crafted attack payloads to test
+                SQL Injection, XSS, Path Traversal.</p>
+
+            {% if scan_data.fuzz_done %}
+            <p class="success">
+                Fuzzing Complete! —
+                {{ scan_data.fuzz_results|length }}
+                tests run
+            </p>
+            <table>
+                <tr>
+                    <th>Endpoint</th>
+                    <th>Type</th>
+                    <th>Payload</th>
+                    <th>Status</th>
+                    <th>Result</th>
+                </tr>
+                {% for r in scan_data.fuzz_results %}
+                <tr class="
+                {% if 'REFLECTED' in r.result %}
+                row-high
+                {% else %}
+                row-low
+                {% endif %}
+            ">
+                    <td>{{ r.endpoint }}</td>
+                    <td>{{ r.type }}</td>
+                    <td>{{ r.payload[:30] }}</td>
+                    <td>{{ r.status_code }}</td>
+                    <td><strong>{{ r.result }}</strong></td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <p class="warning">
+                Click Run Fuzzing to test attack payloads.
+            </p>
+            {% endif %}
+            <a href="/fuzz" class="btn btn-red">
+                Run Fuzzing
+            </a>
+        </div>
+        <!-- Authentication Testing Card -->
+        <div class="card" id="auth">
+            <h2>🔐 Authentication Testing</h2>
+            <p>Tests login with valid, invalid,
+                empty and injection credentials.</p>
+
+            {% if scan_data.auth_done %}
+            <p class="success">
+                Auth Testing Complete! —
+                {{ scan_data.auth_results|length }} tests run
+            </p>
+            <table>
+                <tr>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Expected</th>
+                    <th>Actual</th>
+                    <th>Status</th>
+                    <th>Result</th>
+                </tr>
+                {% for r in scan_data.auth_results %}
+                <tr class="
+                {% if 'UNEXPECTED' in r.result %}
+                row-high
+                {% else %}
+                row-low
+                {% endif %}">
+                    <td>{{ r.username }}</td>
+                    <td>{{ r.password }}</td>
+                    <td>{{ r.expected }}</td>
+                    <td>{{ r.actual }}</td>
+                    <td>{{ r.status }}</td>
+                    <td><strong>{{ r.result }}</strong></td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <p class="warning">
+                Click Run Auth Testing to test credentials.
+            </p>
+            {% endif %}
+            <a href="/auth" class="btn">
+                Run Auth Testing
+            </a>
+        </div>
+
+        <!-- API Endpoints Card -->
+        <div class="card" id="api">
+            <h2>🔌 API Endpoints</h2>
+            <p>Scans and tests all API endpoints
+                for exposure and security issues.</p>
+
+            {% if scan_data.api_done %}
+            <p class="success">
+                API Scan Complete! —
+                {{ scan_data.api_results|length }} endpoints tested
+            </p>
+            <table>
+                <tr>
+                    <th>Endpoint</th>
+                    <th>Method</th>
+                    <th>Status</th>
+                    <th>Response Preview</th>
+                    <th>Risk</th>
+                </tr>
+                {% for r in scan_data.api_results %}
+                <tr class="
+                {% if 'EXPOSED' in r.accessible %}
+                row-medium
+                {% else %}
+                row-low
+                {% endif %}">
+                    <td>{{ r.url }}</td>
+                    <td>{{ r.method }}</td>
+                    <td>{{ r.status_code }}</td>
+                    <td>{{ r.response[:50] }}</td>
+                    <td><strong>{{ r.accessible }}</strong></td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <p class="warning">
+                Click Run API Scan to test endpoints.
+            </p>
+            {% endif %}
+            <a href="/api-scan" class="btn btn-blue">
+                Run API Scan
+            </a>
+        </div>
     </div>
 </body>
 
